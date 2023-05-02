@@ -12,7 +12,7 @@ set -e
 export PATH="/opt/wasi-sdk/bin:$PATH"
 cd zlib-1.2.13/
 CC=/opt/wasi-sdk/bin/clang RANLIB=/opt/wasi-sdk/bin/ranlib ./configure --prefix=
-make install \
+sudo make install \
 	prefix=/opt/wasi-sdk/share/wasi-sysroot \
 	libdir=/opt/wasi-sdk/share/wasi-sysroot/lib/wasm32-wasi \
 	pkgconfigdir=/opt/wasi-sdk/share/wasi-sysroot/lib/pkgconfig
@@ -30,6 +30,7 @@ cd ../wasi
 CONFIG_SITE=../../Tools/wasm/config.site-wasm32-wasi ../../Tools/wasm/wasi-env \
     ../../configure -C --host=wasm32-unknown-wasi --build=$(../../config.guess) \
         --with-build-python=$(pwd)/../build/python --prefix=$(pwd)/install --disable-test-modules
+make wasm_stdlib
 make
 make install
 cd ../../..
