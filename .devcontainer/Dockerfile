@@ -27,7 +27,11 @@ RUN rustup update stable \
 RUN echo "deb-src http://deb.debian.org/debian $VARIANT main" >> /etc/apt/sources.list \
     && sudo apt-get update \
     && sudo apt-get -y build-dep python3 \
-    && sudo apt-get -y install pkg-config
+    && sudo apt-get -y install pkg-config \
+    && sudo apt-get -y install build-essential pkg-config \
+              libbz2-dev libffi-dev libgdbm-dev libgdbm-compat-dev \
+              liblzma-dev libsqlite3-dev libssl-dev \
+              lzma lzma-dev uuid-dev zlib1g-dev
 
 # Install WASI-SDK
 RUN cd /tmp \
